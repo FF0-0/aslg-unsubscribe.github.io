@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unsubscribe from ASLG Communications</title>
+    <style>
+        :root {
+            --aslg-primary: #2c3e50;
+            --aslg-secondary: #e74c3c;
+            --aslg-light: #ecf0f1;
+        }
+        
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f9f9f9;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #333;
+        }
+        
+        .unsubscribe-container {
+            background-color: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            width: 100%;
+            max-width: 500px;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .logo {
+            width: 120px;
+            margin-bottom: 20px;
+        }
+        
+        h1 {
+            color: var(--aslg-primary);
+            margin-bottom: 10px;
+        }
+        
+        p {
+            color: #666;
+            line-height: 1.6;
+            margin-bottom: 25px;
+            display: block; /* 确保段落是块级元素 */
+            width: 100%; /* 占满容器宽度 */
+        }
+        
+        .unsubscribe-btn {
+            display: inline-block;
+            background-color: var(--aslg-secondary);
+            color: white;
+            text-decoration: none;
+            padding: 12px 30px;
+            border-radius: 5px;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            margin: 10px 0;
+        }
+        
+        .unsubscribe-btn:hover {
+            background-color: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 3px 10px rgba(231, 76, 60, 0.3);
+        }
+        
+        .footer {
+            margin-top: 30px;
+            font-size: 12px;
+            color: #999;
+        }
+        
+        .email-display {
+            font-weight: bold;
+            color: var(--aslg-primary);
+            word-break: break-all;
+        }
+        
+        @media (max-width: 600px) {
+            .unsubscribe-container {
+                padding: 30px 20px;
+                margin: 20px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- 恢复容器div -->
+    <div class="unsubscribe-container">
+        <h1>We're sorry to see you go</h1>
+        
+        <p>You're requesting to unsubscribe from ASLG communications.</p>
+        
+        <p>Your email: <span class="email-display" id="userEmail">loading...</span></p>
+        
+        <p>Click below to confirm unsubscription. This will open your email client to send us a request.</p>
+        
+        <a href="#" id="unsubscribeLink" class="unsubscribe-btn">Unsubscribe Now</a>
+        
+        <p class="footer">
+            If you change your mind, you can resubscribe anytime.<br>
+        </p>
+    </div>
+
+    <script>
+        // 自动获取URL中的email参数
+        function getEmailFromURL() {
+            const urlParams = new URLSearchParams(window.location.search);
+            return urlParams.get('email');
+        }
+        
+        // 设置mailto链接
+        function setupUnsubscribeLink() {
+            const email = getEmailFromURL();
+            const emailDisplay = document.getElementById('userEmail');
+            const unsubscribeLink = document.getElementById('unsubscribeLink');
+            
+            if (email) {
+                emailDisplay.textContent = email;
+                unsubscribeLink.href = `mailto:frida@air-supply.cn?subject=Unsubscribe Request&body=Please unsubscribe the following email from all ASLG communications:%0D%0A%0D%0AEmail: ${email}%0D%0A%0D%0AThank you.`;
+            } else {
+                emailDisplay.textContent = "email not provided";
+                unsubscribeLink.href = "mailto:frida@air-supply.cn?subject=Unsubscribe Request&body=Please unsubscribe me from all ASLG communications.%0D%0A%0D%0AThank you.";
+            }
+        }
+        
+        // 页面加载时执行
+        window.onload = setupUnsubscribeLink;
+    </script>
+</body>
+</html>
